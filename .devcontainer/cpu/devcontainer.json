@@ -1,0 +1,61 @@
+{
+  "name": "CHERI Control Development (CPU - Software Rendering)",
+  
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "MUJOCO_VERSION": "main"
+    }
+  },
+  
+  "runArgs": [
+    "--network=host",
+    "--device=/dev/dri",
+    "--ipc=host",
+    "--cap-add=SYS_PTRACE",
+    "--security-opt=seccomp=unconfined"
+  ],
+  
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+    "source=${localEnv:XDG_RUNTIME_DIR},target=${localEnv:XDG_RUNTIME_DIR},type=bind"
+  ],
+  
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
+    "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
+    "LIBGL_ALWAYS_INDIRECT": "0",
+    "RTROBOT_DIR": "/workspaces/cheri/rtrobot"
+  },
+  
+  "workspaceFolder": "/workspaces/cheri",
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cmake-tools",
+        "twxs.cmake",
+        "ms-vscode.makefile-tools",
+        "eamodio.gitlens"
+      ],
+      "settings": {
+        "cmake.configureOnOpen": false,
+        "cmake.buildDirectory": "${workspaceFolder}/cheri-control/build",
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+        "files.associations": {
+          "*.hh": "cpp",
+          "*.cc": "cpp"
+        }
+      }
+    }
+  },
+  
+  "postCreateCommand": "echo 'CPU Container created. Run build commands manually or use: cd rtrobot && mkdir -p build && cd build && cmake .. && make'",
+  
+  "remoteUser": "cheri"
+}
+
+
