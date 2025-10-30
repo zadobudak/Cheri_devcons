@@ -38,7 +38,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Build and install MuJoCo from source (CPU-only, software rendering)
-ARG MUJOCO_VERSION=main
+ARG MUJOCO_VERSION=3.3.7
 ENV MUJOCO_VERSION=${MUJOCO_VERSION}
 
 RUN git clone --depth 1 --branch ${MUJOCO_VERSION} https://github.com/google-deepmind/mujoco.git /tmp/mujoco \

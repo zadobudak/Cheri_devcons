@@ -37,29 +37,6 @@
   
   "workspaceFolder": "/workspaces/cheri",
   
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-vscode.cpptools",
-        "ms-vscode.cpptools-extension-pack",
-        "ms-vscode.cmake-tools",
-        "twxs.cmake",
-        "ms-vscode.makefile-tools",
-        "eamodio.gitlens"
-      ],
-      "settings": {
-        "cmake.configureOnOpen": false,
-        "cmake.buildDirectory": "${workspaceFolder}/cheri-control/build",
-        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-        "files.associations": {
-          "*.hh": "cpp",
-          "*.cc": "cpp"
-        }
-      }
-    }
-  },
-  
-  "postCreateCommand": "echo 'GPU Container created. Run build commands manually or use: cd rtrobot && mkdir -p build && cd build && cmake .. && make'",
   
   "remoteUser": "cheri"
 }
