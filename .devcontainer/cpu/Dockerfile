@@ -7,39 +7,29 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     git \
-    pkg-config \
-    sudo \
-    wget \
     ninja-build \
-    # X11 support
-    x11-apps \
+    sudo \
+    # X11 libraries for GLFW
     libx11-dev \
     libxrandr-dev \
     libxinerama-dev \
     libxcursor-dev \
     libxi-dev \
-    libxxf86vm-dev \
-    # Wayland support
+    # Wayland support for GLFW
     libwayland-dev \
     libxkbcommon-dev \
-    # OpenGL (software rendering via Mesa)
-    libgl1-mesa-dev \
+    # OpenGL for software rendering
     libglu1-mesa-dev \
-    mesa-utils \
-    libglew-dev \
-    libegl1 \
-    libgles2 \
-    # MuJoCo build dependencies
+    # MuJoCo dependencies
     libeigen3-dev \
     libxml2-dev \
-    # Tools
+    # Development tools
     gdb \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
 # Build and install MuJoCo from source (CPU-only, software rendering)
 ARG MUJOCO_VERSION=3.3.7
-ENV MUJOCO_VERSION=${MUJOCO_VERSION}
 
 RUN git clone --depth 1 --branch ${MUJOCO_VERSION} https://github.com/google-deepmind/mujoco.git /tmp/mujoco \
     && cd /tmp/mujoco \
@@ -65,17 +55,15 @@ ENV MUJOCO_DIR=/usr/local \
     CMAKE_PREFIX_PATH=/usr/local:${CMAKE_PREFIX_PATH} \
     MUJOCO_GL=glfw
 
-# Create non-root user (reuse existing ubuntu user with UID/GID 1000)
+# Create non-root user
 ARG USERNAME=cheri
 ARG USER_UID=1000
 ARG USER_GID=1000
 
 RUN if getent passwd $USER_UID; then \
-        # User with UID exists, rename it
         existing_user=$(getent passwd $USER_UID | cut -d: -f1) && \
         usermod -l $USERNAME -d /home/$USERNAME -m $existing_user; \
     else \
-        # Create new user
         groupadd --gid $USER_GID $USERNAME && \
         useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -s /bin/bash; \
     fi \
@@ -84,10 +72,3 @@ RUN if getent passwd $USER_UID; then \
 
 USER $USERNAME
 WORKDIR /workspaces/cheri
-
-# Set up environment for software-rendered OpenGL
-ENV LIBGL_ALWAYS_INDIRECT=0
-
-
-
-

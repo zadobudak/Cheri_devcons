@@ -1,0 +1,156 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build rtrobot",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build",
+                "-S",
+                ".",
+                "&&",
+                "cmake",
+                "--build",
+                "build",
+                "--",
+                "-j$(nproc)",
+                "&&",
+                "cmake",
+                "--install",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rtrobot"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "detail": "Build and install rtrobot library and client tools"
+        },
+        {
+            "label": "Build cheri-control",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-B",
+                "build",
+                "-S",
+                ".",
+                "-DRTROBOT_DIR=${workspaceFolder}/rtrobot",
+                "&&",
+                "cmake",
+                "--build",
+                "build",
+                "--",
+                "-j$(nproc)",
+                "&&",
+                "cmake",
+                "--install",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cheri-control"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "detail": "Build and install cheri-control (simulation and dynamixel executables)"
+        },
+        {
+            "label": "Build All (rtrobot + cheri-control)",
+            "dependsOn": [
+                "Build rtrobot",
+                "Build cheri-control"
+            ],
+            "dependsOrder": "sequence",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "detail": "Build rtrobot first, then cheri-control"
+        },
+        {
+            "label": "Clean rtrobot",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "build",
+                "bin",
+                "lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rtrobot"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Clean rtrobot build artifacts"
+        },
+        {
+            "label": "Clean cheri-control",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "build",
+                "bin",
+                "lib"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/cheri-control"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Clean cheri-control build artifacts"
+        },
+        {
+            "label": "Clean All",
+            "dependsOn": [
+                "Clean rtrobot",
+                "Clean cheri-control"
+            ],
+            "problemMatcher": [],
+            "detail": "Clean all build artifacts"
+        },
+        {
+            "label": "Rebuild All",
+            "dependsOn": [
+                "Clean All",
+                "Build All (rtrobot + cheri-control)"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "detail": "Clean and rebuild everything from scratch"
+        }
+    ]
+}
+

@@ -1,39 +1,29 @@
 {
   "name": "CHERI Control Development (CPU - Software Rendering)",
-  
+  "initializeCommand": "sh -lc 'command -v xhost >/dev/null 2>&1 && xhost +local:root || true'",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "MUJOCO_VERSION": "main"
+      "MUJOCO_VERSION": "3.3.7"
     }
   },
-  
   "runArgs": [
     "--network=host",
-    "--device=/dev/dri",
     "--ipc=host",
     "--cap-add=SYS_PTRACE",
     "--security-opt=seccomp=unconfined"
   ],
-  
   "mounts": [
     "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
     "source=${localEnv:XDG_RUNTIME_DIR},target=${localEnv:XDG_RUNTIME_DIR},type=bind"
   ],
-  
   "containerEnv": {
     "DISPLAY": "${localEnv:DISPLAY}",
     "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
     "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
     "LIBGL_ALWAYS_INDIRECT": "0",
-    "RTROBOT_DIR": "/workspaces/cheri/rtrobot"
+    "RTROBOT_DIR": "${containerWorkspaceFolder}/rtrobot"
   },
-  
-  "workspaceFolder": "/workspaces/cheri",
-  
- 
-    
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "remoteUser": "cheri"
 }
-
-

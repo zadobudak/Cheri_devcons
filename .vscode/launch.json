@@ -1,0 +1,141 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Simulation (Realtime)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cheri-control/bin/simulation",
+            "args": ["--config", "config/default/supervisor.toml"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/cheri-control",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build cheri-control",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Run Dynamixel Robot",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cheri-control/bin/dynamixel",
+            "args": ["--config", "config/default/supervisor.toml"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/cheri-control",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build cheri-control",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Simulation",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cheri-control/bin/simulation",
+            "args": ["--config", "config/default/supervisor.toml"],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/cheri-control",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build cheri-control",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Debug Dynamixel Robot",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/cheri-control/bin/dynamixel",
+            "args": ["--config", "config/default/supervisor.toml"],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}/cheri-control",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build cheri-control",
+            "miDebuggerPath": "/usr/bin/gdb"
+        },
+        {
+            "name": "Run rtrobot log_data",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/rtrobot/bin/log_data",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/rtrobot",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build rtrobot",
+            "miDebuggerPath": "/usr/bin/gdb"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Run Simulation + Log Data",
+            "configurations": [
+                "Run rtrobot log_data",
+                "Run Simulation (Realtime)"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "Build All (rtrobot + cheri-control)"
+        },
+        {
+            "name": "Run Dynamixel + Log Data",
+            "configurations": [
+                "Run rtrobot log_data",
+                "Run Dynamixel Robot"
+            ],
+            "stopAll": true,
+            "preLaunchTask": "Build All (rtrobot + cheri-control)"
+        }
+    ]
+}
+
