@@ -1,11 +1,11 @@
 {
-  "name": "CHERI Control Development (GPU - NVIDIA CUDA)",
-  "initializeCommand": "sh -lc 'command -v xhost >/dev/null 2>&1 && xhost +local:root || true'",
+  "name": "CHERI Control Development (GPU - Local Build)",
+  "initializeCommand": "sh -lc 'bash .devcontainer/host-init.sh || true'",
   
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "MUJOCO_VERSION": "main"
+      "MUJOCO_VERSION": "3.3.7" // MuJoCo version to use
     }
   },
   
@@ -21,19 +21,11 @@
   
   "mounts": [
     "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
-    "source=${localEnv:XDG_RUNTIME_DIR},target=${localEnv:XDG_RUNTIME_DIR},type=bind"
   ],
   
   "containerEnv": {
     "DISPLAY": "${localEnv:DISPLAY}",
-    "WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
-    "XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
-    "LIBGL_ALWAYS_INDIRECT": "0",
     "RTROBOT_DIR": "${containerWorkspaceFolder}/rtrobot",
-    "NVIDIA_VISIBLE_DEVICES": "all",
-    "NVIDIA_DRIVER_CAPABILITIES": "graphics,utility,compute",
-    "__NV_PRIME_RENDER_OFFLOAD": "1",
-    "__GLX_VENDOR_LIBRARY_NAME": "nvidia"
   },
   
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",

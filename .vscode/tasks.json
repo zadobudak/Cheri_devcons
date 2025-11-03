@@ -83,10 +83,7 @@
                 "Build cheri-control"
             ],
             "dependsOrder": "sequence",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "group": "build",
             "problemMatcher": [],
             "presentation": {
                 "echo": true,
@@ -149,7 +146,11 @@
             ],
             "dependsOrder": "sequence",
             "problemMatcher": [],
-            "detail": "Clean and rebuild everything from scratch"
+            "detail": "Clean and rebuild everything from scratch",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
