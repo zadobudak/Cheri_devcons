@@ -1,0 +1,7 @@
+[submodule "cheri-control"]
+	path = cheri-control
+	url = git@github.com:metuatlas/cheri-control.git
+[submodule "rtrobot"]
+	path = rtrobot
+	url = git@github.com:metuatlas/rtrobot.git
+
