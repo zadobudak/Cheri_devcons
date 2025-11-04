@@ -22,7 +22,7 @@ Clone the repository with submodules:
 ```bash
 git clone https://github.com/zadobudak/Cheri_devcons.git
 
-cd cheri-devcons
+cd Cheri-devcons
 
 git submodule init
 git submodule update
