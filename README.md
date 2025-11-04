@@ -20,7 +20,7 @@ To clone these repositories you need to have ssh access to the repositories.
 
 Clone the repository with submodules:
 ```bash
-git clone  https://github.com/zado/cheri-devcons.git
+git clone https://github.com/zadobudak/Cheri_devcons.git
 git submodule init
 git submodule update
 cd cheri-devcons
