@@ -31,8 +31,8 @@ Build the project using tasks defined in `.vscode/tasks.json`.
 
 ## Available Containers
 
-Two devcontainer configurations are provided in `.devcontainer/`:
-- CPU: Software rendering
+Two main devcontainer configurations are provided in with option with local build and direct pull from ghcr `.devcontainer/`:
+- CPU : Software rendering
 - GPU: NVIDIA CUDA with hardware acceleration
 
 Images are built locally for your machine.
