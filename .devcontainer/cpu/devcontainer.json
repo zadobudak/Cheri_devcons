@@ -4,7 +4,7 @@
   // This is necessary for container to display windows. Silent fail if xhost is not present. 
   // This is better than failing directly since in case of windows environment xhost may not be present.
   // Though I am not sure. 
-  "initializeCommand": "sh -lc 'bash .devcontainer/host-init.sh || true'",
+  "initializeCommand": "sh -lc 'command -v xhost >/dev/null 2>&1 && xhost +local:root || true'",
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
@@ -17,17 +17,17 @@
     "--ipc=host",
     "--cap-add=SYS_PTRACE",
     "--security-opt=seccomp=unconfined",
-    "--device=/dev/USBtty0", // default dynamixel usb port can be changed
+    // "--device=/dev/USBtty0" // default dynamixel usb port can be changed
     // To add all devices to the container in batch. Also mount the /dev directory to the container. 
     // even though we use non root user this still can break system if not used with caution.
-    "--privileged" // commented out for now 
+    // "--privileged" // commented out for now 
   ],
   "mounts": [
     // Allow mounting of the X11 socket and runtime directory.
     // This is necessary for container to display windows. May or may not work depending on the host.
     "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
     // Mount the /dev directory to the container. This is necessary for container to access the devices.
-    "source=/dev,target=/dev,type=bind" // commented out for now 
+    // "source=/dev,target=/dev,type=bind" // commented out for now 
   ],
   "containerEnv": {
     "DISPLAY": "${localEnv:DISPLAY}",

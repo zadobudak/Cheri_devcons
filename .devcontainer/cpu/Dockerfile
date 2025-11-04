@@ -45,8 +45,8 @@ RUN git clone --depth 1 --branch ${MUJOCO_VERSION} https://github.com/google-dee
         -DMUJOCO_BUILD_PYTHON=OFF \
         -DMUJOCO_ENABLE_AVX=ON \
         -DMUJOCO_ENABLE_AVX_INTRINSICS=ON \
-    && ninja \
-    && ninja install \
+    && ninja -j$(nproc) \
+    && ninja install -j$(nproc) \
     && rm -rf /tmp/mujoco
 
 # Set MuJoCo environment variables for CPU/software rendering

@@ -42,7 +42,7 @@ Images are built locally for your machine.
 - [ ] Test for different architectures.
 - [ ] Test for devcontainer tool from npm so that it is possible to use it without vscode.
 - [ ] Publish devcontainer images to GitHub Container Registry
-- [ ] Add GitHub Actions workflow to build and publish containers 
+- [x] Add GitHub Actions workflow to build and publish containers 
 - [ ] Test display forwarding with Windows if it is possible.
 - [ ] Test display forwarding with MacOS if it is possible.
 - 

@@ -1,0 +1,22 @@
+{
+  "name": "CHERI Development Environment (CPU - Prebuilt)",
+  "initializeCommand": "sh -lc 'command -v xhost >/dev/null 2>&1 && xhost +local:root || true'",
+  "image": "ghcr.io/zadobudak/cheri_devcons:cpu-latest",
+  "runArgs": [
+    "--network=host",
+    "--ipc=host",
+    "--cap-add=SYS_PTRACE",
+    "--security-opt=seccomp=unconfined"
+  ],
+  "mounts": [
+    "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind"
+  ],
+  "containerEnv": {
+    "DISPLAY": "${localEnv:DISPLAY}",
+    "RTROBOT_DIR": "${containerWorkspaceFolder}/rtrobot"
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "remoteUser": "cheri"
+}
+
+
