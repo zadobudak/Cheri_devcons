@@ -20,7 +20,9 @@ To clone these repositories you need to have ssh access to the repositories.
 
 Clone the repository with submodules:
 ```bash
-git clone --recurse-submodules https://github.com/zado/cheri-devcons.git
+git clone  https://github.com/zado/cheri-devcons.git
+git submodule init
+git submodule update
 cd cheri-devcons
 code .
 ```
@@ -41,8 +43,8 @@ Images are built locally for your machine.
 - [ ] Test in Ubuntu, Debian etc. 
 - [ ] Test for different architectures.
 - [ ] Test for devcontainer tool from npm so that it is possible to use it without vscode.
-- [ ] Publish devcontainer images to GitHub Container Registry
+- [x] Publish devcontainer images to GitHub Container Registry
 - [x] Add GitHub Actions workflow to build and publish containers 
 - [ ] Test display forwarding with Windows if it is possible.
 - [ ] Test display forwarding with MacOS if it is possible.
-- 
+  
