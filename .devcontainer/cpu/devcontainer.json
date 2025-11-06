@@ -8,7 +8,6 @@
   "build": {
     "dockerfile": "Dockerfile",
     "args": {
-      "MUJOCO_VERSION": "3.3.7" // MuJoCo version to use
     }
   },
   "runArgs": [

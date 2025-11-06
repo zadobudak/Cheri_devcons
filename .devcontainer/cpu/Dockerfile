@@ -28,32 +28,6 @@ RUN apt-get update && apt-get install -y \
     vim \
     && rm -rf /var/lib/apt/lists/*
 
-# Build and install MuJoCo from source (CPU-only, software rendering)
-ARG MUJOCO_VERSION=3.3.7
-
-RUN git clone --depth 1 --branch ${MUJOCO_VERSION} https://github.com/google-deepmind/mujoco.git /tmp/mujoco \
-    && cd /tmp/mujoco \
-    && mkdir build \
-    && cd build \
-    && cmake .. \
-        -G Ninja \
-        -DCMAKE_INSTALL_PREFIX=/usr/local \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DMUJOCO_BUILD_EXAMPLES=OFF \
-        -DMUJOCO_BUILD_SIMULATE=ON \
-        -DMUJOCO_BUILD_TESTS=OFF \
-        -DMUJOCO_BUILD_PYTHON=OFF \
-        -DMUJOCO_ENABLE_AVX=ON \
-        -DMUJOCO_ENABLE_AVX_INTRINSICS=ON \
-    && ninja -j$(nproc) \
-    && ninja install -j$(nproc) \
-    && rm -rf /tmp/mujoco
-
-# Set MuJoCo environment variables for CPU/software rendering
-ENV MUJOCO_DIR=/usr/local \
-    LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH} \
-    CMAKE_PREFIX_PATH=/usr/local:${CMAKE_PREFIX_PATH} \
-    MUJOCO_GL=glfw
 
 # Create non-root user
 ARG USERNAME=cheri
