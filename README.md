@@ -36,7 +36,7 @@ Build the project using tasks defined in `.vscode/tasks.json`.
 
 ## Available Containers
 
-Two main devcontainer configurations are provided in with option with local build and direct pull from ghcr 
+Two main devcontainer configurations are provided  
 
 Configurations are under `.devcontainer/`:
 - CPU : Software rendering
@@ -47,8 +47,6 @@ Configurations are under `.devcontainer/`:
 - [ ] Test in Ubuntu, Debian etc. 
 - [ ] Test for different architectures.
 - [ ] Test for devcontainer tool from npm so that it is possible to use it without vscode.
-- [x] Publish devcontainer images to GitHub Container Registry
-- [x] Add GitHub Actions workflow to build and publish containers 
 - [ ] Test display forwarding with Windows if it is possible.
 - [ ] Test display forwarding with MacOS if it is possible.
   
